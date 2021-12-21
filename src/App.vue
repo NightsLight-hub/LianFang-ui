@@ -1,26 +1,76 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+  <div id="root-container">
+    <a-layout style="height: 100%;width: 100%">
+      <a-layout-sider style="height: 100%;width: 100%" v-model:collapsed="siderCollapsed" collapsible>
+        <a-menu
+          mode="inline"
+          theme="dark"
+          v-model:selectedKeys="selectedKeys"
+        >
+          <a-menu-item key="1">
+            <template #icon>
+              <PieChartOutlined/>
+            </template>
+            <span>Option 1</span>
+          </a-menu-item>
+          <!--          <a-menu-item key="2">-->
+          <!--            <template #icon>-->
+          <!--              <DesktopOutlined />-->
+          <!--            </template>-->
+          <!--            <span>Option 2</span>-->
+          <!--          </a-menu-item>-->
+          <!--          <a-menu-item key="3">-->
+          <!--            <template #icon>-->
+          <!--              <InboxOutlined />-->
+          <!--            </template>-->
+          <!--            <span>Option 3</span>-->
+          <!--          </a-menu-item>-->
+        </a-menu>
+      </a-layout-sider>
+      <a-layout-content>
+        <div id="content-container">
+          <router-view/>
+        </div>
+      </a-layout-content>
+    </a-layout>
+  </div>
+  <!--  <div id="nav">-->
+  <!--    <router-link to="/">Home</router-link> |-->
+  <!--    <router-link to="/about">About</router-link>-->
+  <!--  </div>-->
 
+</template>
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {PieChartOutlined} from '@ant-design/icons-vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    PieChartOutlined
+  },
+  data() {
+    return {
+      siderCollapsed: true,
+      selectedKeys: []
+    };
+  },
+  watch: {
+    selectedKeys (newValue, oldValue) {
+      console.log('selectedKeys changed' + newValue);
+    }
+  },
+};
 
+</script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#root-container {
+  height: 100%;
+  width: 100%;
+}
+
+#content-container {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
 }
 </style>
