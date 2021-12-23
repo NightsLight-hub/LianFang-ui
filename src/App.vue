@@ -7,7 +7,7 @@
           theme="dark"
           v-model:selectedKeys="selectedKeys"
         >
-          <a-menu-item key="1">
+          <a-menu-item key="home">
             <template #icon>
               <PieChartOutlined/>
             </template>
@@ -51,12 +51,17 @@ export default {
   data() {
     return {
       siderCollapsed: true,
-      selectedKeys: []
+      selectedKeys: ['home']
     };
   },
   watch: {
     selectedKeys (newValue, oldValue) {
-      console.log('selectedKeys changed' + newValue);
+       if (newValue && newValue[0]){
+         switch (newValue[0]){
+           case 'home':
+              this.$router.replace("/");
+         }
+       }
     }
   },
 };
