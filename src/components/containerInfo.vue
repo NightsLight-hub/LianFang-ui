@@ -15,7 +15,7 @@
           </span>
         </a-button>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="6">
         <a-space>
           <a-button type="text" style="width: 150px">
             <span :class="cpuClass"><span>CPU:  </span>{{ cpuUsageCore }} &nbsp;&nbsp; {{ cpuUsagePercent }}</span>
@@ -28,7 +28,7 @@
         </a-space>
       </a-col>
     </a-row>
-    <a-divider style="height: 2px; background-color: #7cb305"/>
+<!--    <a-divider style="height: 2px; background-color: #7cb305"/>-->
   </div>
 </template>
 
