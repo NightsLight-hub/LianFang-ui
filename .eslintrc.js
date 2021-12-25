@@ -1,0 +1,17 @@
+module.exports = {
+  extends: [
+    // add more generic rulesets here, such as:
+    // 'eslint:recommended',
+    'plugin:vue/essential',
+    // 'plugin:vue/recommended' // Use this if you are using Vue.js 2.x.
+  ],
+  rules: {
+    // override/add rules settings here, such as:
+    // 'vue/no-unused-vars': 'error'
+    'vue/no-v-model-argument': 0,
+    "semi": [
+      2,
+      "always"
+    ]
+  }
+}

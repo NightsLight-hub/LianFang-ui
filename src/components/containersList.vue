@@ -1,5 +1,6 @@
 <template>
   <div style="height: 100%;width: 100%">
+    <a-divider style="height: 4px; background-color: #7cb305" />
     <container-info v-for="(containerInfo, index) in containersInfo" :key="index" :container-info="containerInfo"></container-info>
   </div>
 </template>
@@ -31,5 +32,7 @@ export default {
 </script>
 
 <style scoped>
-
+.ant-divider-horizontal {
+  margin: 5px 0;
+}
 </style>

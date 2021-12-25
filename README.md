@@ -22,3 +22,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### eslint-plugin-vue
+See [eslint-plugin-vue](https://eslint.vuejs.org/rules/no-v-model-argument.html)

@@ -49,6 +49,12 @@ export default {
           style: {
             fill: '#364fc7',
           },
+          content: (data, mappingData, index) => {
+            if (data.mKey === 'measures') {
+              console.log(data);
+              return data.measures + '%';
+            }
+          }
         },
       },
       tooltip: {
@@ -69,6 +75,7 @@ export default {
   },
   watch: {
     stsData(newValue, oldValue) {
+      debugger;
       let memoryStats = newValue['memory_stats'];
       let memUsed = memoryStats.usage;
       if (memoryStats['stats']['cache']) {

@@ -5,7 +5,6 @@ function resolve(dir) {
 }
 
 module.exports = {
-  lintOnSave: true,
   configureWebpack: {
     module: {
       unknownContextRegExp: /^('|')\.\/.*?\1$/,
@@ -20,6 +19,7 @@ module.exports = {
     //   }
     // }
   },
+
   devServer: {
     overlay: {
       warnings: true,
@@ -27,7 +27,7 @@ module.exports = {
     },
     proxy: {
       '/v1': {
-        target: 'http://localhost:8081/',
+        target: 'http://192.168.134.179:8081/',
         ws: true,
         changeOrigin: true
       },
