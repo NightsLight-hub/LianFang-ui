@@ -75,7 +75,6 @@ export default {
   },
   watch: {
     stsData(newValue, oldValue) {
-      debugger;
       let memoryStats = newValue['memory_stats'];
       let memUsed = memoryStats.usage;
       if (memoryStats['stats']['cache']) {

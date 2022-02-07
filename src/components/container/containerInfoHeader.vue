@@ -1,22 +1,29 @@
 <template>
   <div>
     <a-row class="single-row">
-      <a-col :span="5">
-        <a-button :title="'容器名称'" type="link" style="width: 100%">
+      <a-col :span="4">
+        <a-button :title="'名称'" type="link" style="width: 100%">
           <span>
             容器名称
           </span>
         </a-button>
       </a-col>
+      <a-col :span="2">
+        <a-button :title="'状态'" type="link" style="width: 100%">
+          <span>
+            状态
+          </span>
+        </a-button>
+      </a-col>
       <a-col :span="6">
-        <a-button :title="'容器镜像'" style="width: 100%" type="link">
+        <a-button :title="'镜像'" style="width: 100%" type="link">
           <span class="overflow-hidden">
             容器镜像
           </span>
         </a-button>
       </a-col>
       <a-col :span="6">
-        <a-button :title="'容器镜像'" style="width: 100%" type="link">
+        <a-button :title="'资源概况'" style="width: 100%" type="link">
           <span class="overflow-hidden">
             资源监控
           </span>
@@ -28,7 +35,7 @@
 </template>
 
 <script>
-import containerResourceStats from '@/components/containerResourceStats';
+import containerResourceStats from '@/components/container/containerResourceStats';
 import axios from "axios";
 import {v4} from "uuid";
 

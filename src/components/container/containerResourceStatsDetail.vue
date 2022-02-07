@@ -1,18 +1,20 @@
 <template>
-  <a-row style="height: 300px">
-    <a-col :span="6">
-      <div :id="id+'-cpu'" style="height: 100%;width:100%"></div>
-    </a-col>
-    <a-col :span="6">
-      <div :id="id+'-mem'" style="height: 100%;width:100%"></div>
-    </a-col>
-    <a-col :span="6">
-      <div :id="id+'-disk'" style="height: 100%;width:100%"></div>
-    </a-col>
-    <a-col :span="6">
-      <div :id="id+'-net'" style="height: 100%;width:100%"></div>
-    </a-col>
-  </a-row>
+  <div>
+    <a-row style="height: 300px">
+      <a-col :span="6">
+        <div :id="id+'-cpu'" style="height: 100%;width:100%"></div>
+      </a-col>
+      <a-col :span="6">
+        <div :id="id+'-mem'" style="height: 100%;width:100%"></div>
+      </a-col>
+      <a-col :span="6">
+        <div :id="id+'-disk'" style="height: 100%;width:100%"></div>
+      </a-col>
+      <a-col :span="6">
+        <div :id="id+'-net'" style="height: 100%;width:100%"></div>
+      </a-col>
+    </a-row>
+  </div>
 
 </template>
 
@@ -88,7 +90,7 @@ export default {
       this.memGuage.render();
       this.diskIoGuage.render();
       this.netIoGuage.render();
-    }
+    },
   }
 };
 </script>

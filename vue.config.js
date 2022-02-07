@@ -5,6 +5,28 @@ function resolve(dir) {
 }
 
 module.exports = {
+  pluginOptions: {
+    "style-resources-loader": {
+      preProcessor: "less",
+      patterns: [
+        // 存放less变量文件的路径
+        path.resolve(__dirname, "./src/*.vue"),
+        path.resolve(__dirname, "./src/App.vue")
+      ]
+    }
+  },
+  css: {
+    loaderOptions: {
+      less: {
+        lessOptions: {
+          modifyVars: {
+            'body-background': '#031f30',
+          },
+          javascriptEnabled: true,
+        },
+      },
+    },
+  },
   configureWebpack: {
     module: {
       unknownContextRegExp: /^('|')\.\/.*?\1$/,
@@ -13,11 +35,6 @@ module.exports = {
     amd: {
       toUrlUndefined: true
     },
-    // resolve: {
-    //   alias: {
-    //     '@': resolve('src')
-    //   }
-    // }
   },
 
   devServer: {
@@ -26,8 +43,8 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/v1': {
-        target: 'http://192.168.134.179:8081/',
+      '/api': {
+        target: 'http://172.19.172.170:8081/',
         ws: true,
         changeOrigin: true
       },

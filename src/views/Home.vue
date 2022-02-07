@@ -11,7 +11,7 @@
 // @ is an alias to /src
 import axios from 'axios';
 import {v4} from 'uuid';
-import ContainersList from "@/components/containersList";
+import ContainersList from "@/components/container/containersList";
 
 export default {
   name: 'Home',

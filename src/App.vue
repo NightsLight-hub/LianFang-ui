@@ -6,6 +6,7 @@
           mode="inline"
           theme="dark"
           v-model:selectedKeys="selectedKeys"
+          @click="menuClick"
         >
           <a-menu-item key="home">
             <template #icon>
@@ -54,20 +55,23 @@ export default {
       selectedKeys: ['home']
     };
   },
-  watch: {
-    selectedKeys (newValue, oldValue) {
-       if (newValue && newValue[0]){
-         switch (newValue[0]){
-           case 'home':
-              this.$router.replace("/");
-         }
-       }
+  methods: {
+    menuClick({item, key, keyPath}) {
+      switch (key) {
+        case 'home':
+          this.$router.replace('/');
+          break;
+        default:
+          this.$router.replace('/');
+      }
     }
   },
 };
 
 </script>
 <style>
+/*@import '~ant-design-vue/dist/antd.dark.less';*/
+
 #root-container {
   height: 100%;
   width: 100%;
