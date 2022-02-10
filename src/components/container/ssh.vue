@@ -16,6 +16,7 @@ export default {
       terminal: {},
       socket: {},
       socketURI: '',
+      execPrepared: false,
     };
   },
   props: {
@@ -109,20 +110,19 @@ export default {
       let _this = this;
       _this.socket.onmessage = (evt) => {
         try {
-          console.log(evt);
-          console.log(evt.data);
-          evt.data.arrayBuffer().then(buffer => {
-            _this.terminal.write(new Uint8Array(buffer));
-          });
-          // // 此处可以判断一下，如果是首次连接，需要将rows，cols传给服务器端
-          // // when server ready for connection,send resize to server
-          // this.socket.send(
-          //   JSON.stringify({
-          //     type: "resize",
-          //     rows: this.terminal.rows,
-          //     cols: this.terminal.cols,
-          //   })
-          // );
+          //当收到这个关键词，说明后端已经准备好exec了，可以交互操作容器shell
+          if (evt.data === 'LianFangSshChannelPrepareFinished') {
+            _this.execPrepared = true;
+            return;
+          }
+          if (this.execPrepared){
+            evt.data.arrayBuffer().then(buffer => {
+              _this.terminal.write(new Uint8Array(buffer));
+            });
+          }else {
+            // 如果后端没准备好exec，此时收到的后端信息，直接展示出来
+            _this.terminal.writeln(evt.data);
+          }
         } catch (e) {
           console.error(e);
           console.log("parse json error.", evt.data);
@@ -142,8 +142,8 @@ export default {
     },
     socketOnError() {
       let _this = this;
-      _this.socket.onerror = () => {
-        console.log("socket 链接失败");
+      _this.socket.onerror = (event) => {
+        console.log("socket 链接失败", event);
       };
     },
   }

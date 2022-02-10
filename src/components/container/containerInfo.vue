@@ -227,6 +227,7 @@ export default {
     containerSsh() {
       console.log('container logs');
       this.sshVisible = true;
+      // this.$router.replace('/ssh');
     },
     containerLogsRefresh() {
       this.containerLogs();
