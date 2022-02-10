@@ -53,12 +53,32 @@
           </a-button>
           <a-button type="primary" shape="round" size="middle" title="浏览日志" @click.stop="containerLogs">
             <template #icon>
+              <!--              <BugOutlined/>-->
+              <FileSearchOutlined/>
+            </template>
+          </a-button>
+          <a-button type="primary" shape="round" size="middle" title="命令行调试" @click.stop="containerSsh">
+            <template #icon>
               <BugOutlined/>
             </template>
           </a-button>
         </a-space>
       </a-col>
     </a-row>
+    <a-modal
+      v-model:visible="sshVisible"
+      title="SSH"
+      @ok="closeSsh"
+      width="100%"
+      :destroyOnClose="true"
+      :keyboard="false"
+      wrapClassName="full-modal"
+    >
+      <template #footer>
+        <a-button type="primary" size="middle" title="关闭" @click.stop="closeSsh">关闭</a-button>
+      </template>
+      <ssh :containerInfo="this.containerInfo"></ssh>
+    </a-modal>
     <a-modal
       v-model:visible="logVisible"
       title="日志"
@@ -84,10 +104,18 @@
 
 <script>
 import containerResourceStats from '@/components/container/containerResourceStats';
-import {AntCloudOutlined, PauseCircleOutlined, PlayCircleOutlined, BugOutlined} from '@ant-design/icons-vue';
+import {
+  AntCloudOutlined,
+  PauseCircleOutlined,
+  PlayCircleOutlined,
+  FileSearchOutlined,
+  BugOutlined
+} from '@ant-design/icons-vue';
 import axios from "axios";
 import {v4} from "uuid";
 import util from "@/utils";
+import {Terminal} from 'xterm';
+import ssh from '@/components/container/ssh';
 
 export default {
   name: "containerInfo",
@@ -96,7 +124,9 @@ export default {
     AntCloudOutlined,
     PauseCircleOutlined,
     PlayCircleOutlined,
+    FileSearchOutlined,
     BugOutlined,
+    ssh,
   },
   props: {
     containerInfo: Object,
@@ -105,6 +135,7 @@ export default {
     return {
       logs: [],
       logVisible: false,
+      sshVisible: false,
       timer: {},
       stsData: {},
       memUsagePercent: '',
@@ -114,6 +145,7 @@ export default {
       cpuClass: '',
       memClass: '',
       msgTimeout: 3,
+      currentSshContainerId: '',
     };
   },
   mounted() {
@@ -133,6 +165,9 @@ export default {
     },
     closeLogs() {
       this.logVisible = false;
+    },
+    closeSsh() {
+      this.sshVisible = false;
     },
     gotoContainerFs() {
       console.log('gotoContainerFs');
@@ -188,6 +223,10 @@ export default {
         }).catch(error => {
         console.error(error);
       });
+    },
+    containerSsh() {
+      console.log('container logs');
+      this.sshVisible = true;
     },
     containerLogsRefresh() {
       this.containerLogs();
@@ -255,6 +294,13 @@ export default {
         console.error(e);
       }
     },
+    // logVisible(newV, oldV) {
+    //   try {
+    //
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // }
   },
 
   computed: {

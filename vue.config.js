@@ -5,21 +5,12 @@ function resolve(dir) {
 }
 
 module.exports = {
-  pluginOptions: {
-    "style-resources-loader": {
-      preProcessor: "less",
-      patterns: [
-        // 存放less变量文件的路径
-        path.resolve(__dirname, "./src/*.vue"),
-        path.resolve(__dirname, "./src/App.vue")
-      ]
-    }
-  },
   css: {
     loaderOptions: {
       less: {
         lessOptions: {
           modifyVars: {
+            'global-theme': '~ant-design-vue/dist/antd.dark.less',
             'body-background': '#031f30',
           },
           javascriptEnabled: true,
@@ -44,10 +35,15 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://172.19.172.170:8081/',
-        ws: true,
+        target: 'http://172.18.39.162:8081/',
+        ws:true,
         changeOrigin: true
       },
+      '/ws': {
+        target: 'ws://172.18.39.162:8081/',
+        ws: true,
+        changeOrigin: true
+      }
     }
   }
 };

@@ -3,7 +3,7 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import Antd, {message, Modal} from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.dark.css';
+// import 'ant-design-vue/dist/antd.dark.css';
 import '@surely-vue/table/dist/index.css';
 import STable from '@surely-vue/table';
 

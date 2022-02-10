@@ -19,6 +19,12 @@ const routes = [
     path: '/fs/:cid',
     name: 'fs',
     component: () => import(/* webpackChunkName: "about" */ '@/views/fs.vue')
+  },
+  {
+    path: '/ssh',
+    name: 'ssh',
+    component: () => import('@/components/container/ssh.vue')
+
   }
 ];
 

@@ -29,6 +29,9 @@
         </a-menu>
       </a-layout-sider>
       <a-layout-content>
+<!--        <div class="content-header">-->
+<!--          <a-switch checked-children="亮" un-checked-children="暗" @change="changeTheme" v-model:checked="lightTheme"/>-->
+<!--        </div>-->
         <div id="content-container">
           <router-view/>
         </div>
@@ -52,7 +55,8 @@ export default {
   data() {
     return {
       siderCollapsed: true,
-      selectedKeys: ['home']
+      selectedKeys: ['home'],
+      lightTheme: false,
     };
   },
   methods: {
@@ -64,13 +68,13 @@ export default {
         default:
           this.$router.replace('/');
       }
-    }
+    },
   },
 };
 
 </script>
-<style>
-/*@import '~ant-design-vue/dist/antd.dark.less';*/
+<style lang="less">
+@import "@{global-theme}";
 
 #root-container {
   height: 100%;
@@ -81,5 +85,10 @@ export default {
   height: 100%;
   width: 100%;
   padding: 10px;
+}
+
+.content-header {
+  height: 42px;
+  width: 100%;
 }
 </style>
