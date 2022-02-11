@@ -115,11 +115,11 @@ export default {
             _this.execPrepared = true;
             return;
           }
-          if (this.execPrepared){
+          if (this.execPrepared) {
             evt.data.arrayBuffer().then(buffer => {
               _this.terminal.write(new Uint8Array(buffer));
             });
-          }else {
+          } else {
             // 如果后端没准备好exec，此时收到的后端信息，直接展示出来
             _this.terminal.writeln(evt.data);
           }

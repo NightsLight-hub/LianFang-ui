@@ -56,6 +56,9 @@ export default {
         })
         .catch(function (error) {
           console.log(error);
+          if(error.response.data){
+            _this.$message.error(error.response.data, 5);
+          }
         });
     }
   }

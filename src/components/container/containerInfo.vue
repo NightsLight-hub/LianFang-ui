@@ -53,7 +53,6 @@
           </a-button>
           <a-button type="primary" shape="round" size="middle" title="浏览日志" @click.stop="containerLogs">
             <template #icon>
-              <!--              <BugOutlined/>-->
               <FileSearchOutlined/>
             </template>
           </a-button>
@@ -183,6 +182,9 @@ export default {
         })
         .catch(function (error) {
           console.error(error);
+          if(error.response.data){
+            _this.$message.error(error.response.data, 5);
+          }
         });
     },
     containerStart() {
@@ -195,7 +197,7 @@ export default {
           this.$message.success(`启动容器 ${_this.containerInfo.Id} 成功`, this.msgTimeout);
         }).catch(error => {
         console.error(error);
-        this.$message.error(`停止容器 ${_this.containerInfo.Id} 成功`, this.msgTimeout);
+        this.$message.error(`启动容器 ${_this.containerInfo.Id} 失败`, this.msgTimeout);
       });
     },
     containerStop() {
@@ -208,7 +210,7 @@ export default {
           this.$message.success(`停止容器 ${_this.containerInfo.Id} 成功`, this.msgTimeout);
         }).catch(error => {
         console.error(error);
-        this.$message.error(`停止容器 ${_this.containerInfo.Id} 成功`, this.msgTimeout);
+        this.$message.error(`停止容器 ${_this.containerInfo.Id} 失败`, this.msgTimeout);
       });
     },
     containerLogs() {
