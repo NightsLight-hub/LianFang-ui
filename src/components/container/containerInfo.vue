@@ -58,7 +58,7 @@
           </a-button>
           <a-button type="primary" shape="round" size="middle" title="命令行调试" @click.stop="containerSsh">
             <template #icon>
-              <BugOutlined/>
+              <CodeOutlined />
             </template>
           </a-button>
         </a-space>
@@ -76,7 +76,7 @@
       <template #footer>
         <a-button type="primary" size="middle" title="关闭" @click.stop="closeSsh">关闭</a-button>
       </template>
-      <ssh :containerInfo="this.containerInfo"></ssh>
+      <ssh :containerInfo="this.containerInfo" @close="closeSsh"></ssh>
     </a-modal>
     <a-modal
       v-model:visible="logVisible"
@@ -108,7 +108,7 @@ import {
   PauseCircleOutlined,
   PlayCircleOutlined,
   FileSearchOutlined,
-  BugOutlined
+  CodeOutlined
 } from '@ant-design/icons-vue';
 import axios from "axios";
 import {v4} from "uuid";
@@ -124,7 +124,7 @@ export default {
     PauseCircleOutlined,
     PlayCircleOutlined,
     FileSearchOutlined,
-    BugOutlined,
+    CodeOutlined,
     ssh,
   },
   props: {
@@ -182,7 +182,7 @@ export default {
         })
         .catch(function (error) {
           console.error(error);
-          if(error.response.data){
+          if (error.response.data) {
             _this.$message.error(error.response.data, 5);
           }
         });
@@ -248,6 +248,10 @@ export default {
       } finally {
         return false;
       }
+    },
+    sshFinished() {
+      console.log('ssh finished');
+      this.sshVisible = false;
     },
   },
   watch: {

@@ -11,6 +11,7 @@ import {FitAddon} from 'xterm-addon-fit';
 
 export default {
   name: "ssh",
+  emits: ['close'],
   data() {
     return {
       terminal: {},
@@ -138,6 +139,7 @@ export default {
         //   this.socket.close();
         // }
         window.removeEventListener("resize", this.onTerminalResize);
+        _this.$emit('close');
       };
     },
     socketOnError() {
